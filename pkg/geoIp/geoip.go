@@ -97,13 +97,13 @@ func (g GeoIP) Find(ipORdomain string) (ip, country string, err error) {
 	}
 	countryIsoCode := record.Country.IsoCode
 	if countryIsoCode == "" {
-		country = fmt.Sprintf("🏁ZZ")
+		country = fmt.Sprintf("⚜426万花筒")
 	}
 	emoji, found := g.emojiMap[countryIsoCode]
 	if found {
 		country = fmt.Sprintf("%v%v", emoji, countryIsoCode)
 	} else {
-		country = fmt.Sprintf("🏁ZZ")
+		country = fmt.Sprintf("⚜426万花筒")
 	}
 	return
 }
