@@ -28,7 +28,7 @@ func CrawlGo() {
 	// Show last time result when launch
 	if proxies == nil && dbProxies != nil {
 		cache.SetProxies("proxies", dbProxies)
-		cache.LastCrawlTime = "抓取中，已载入上次数据库数据"
+		cache.LastCrawlTime = "426,永远的神"
 		log.Infoln("Database: loaded")
 	}
 	if dbProxies != nil {
@@ -95,10 +95,10 @@ func CrawlGo() {
 			if s.Relay == true {
 				_, c, e := geoIp.GeoIpDB.Find(s.OutIp)
 				if e == nil {
-					proxies[i].SetName(fmt.Sprintf("Relay_%s-%s", proxies[i].BaseInfo().Name, c))
+					proxies[i].SetName(fmt.Sprintf("R-%s%s", proxies[i].BaseInfo().Name, c))
 				}
 			} else if s.Pool == true {
-				proxies[i].SetName(fmt.Sprintf("Pool_%s", proxies[i].BaseInfo().Name))
+				proxies[i].SetName(fmt.Sprintf("P-%s", proxies[i].BaseInfo().Name))
 			}
 		}
 	}
