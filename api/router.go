@@ -1,4 +1,4 @@
-package api
+package api                //增加了筛选服务器server, 然而无卵用
 
 import (
 	binhtml "github.com/Sansui233/proxypool/internal/bindata/html"
