@@ -58,8 +58,17 @@ func setupRouter() {
 
 	router.GET("/clash", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "assets/html/clash.html", gin.H{
-			"domain": config.Config.Domain,
-			"port":   config.Config.Port,
+			"domain":               config.Config.Domain,
+			"getters_count":        appcache.GettersCount,
+			"all_proxies_count":    appcache.AllProxiesCount,
+			"ss_proxies_count":     appcache.SSProxiesCount,
+			"ssr_proxies_count":    appcache.SSRProxiesCount,
+			"vmess_proxies_count":  appcache.VmessProxiesCount,
+			"trojan_proxies_count": appcache.TrojanProxiesCount,
+			"useful_proxies_count": appcache.UsefullProxiesCount,
+			"last_crawl_time":      appcache.LastCrawlTime,
+			"is_speed_test":        appcache.IsSpeedTest,
+			"port":                 config.Config.Port,
 		})
 	})
 
@@ -68,7 +77,19 @@ func setupRouter() {
 			"domain": config.Config.Domain,
 		})
 	})
-
+    
+    router.GET("/426yyds", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "assets/html/426yyds.yaml", gin.H{
+			"domain": config.Config.Domain,
+		})
+	})
+	
+	router.GET("/zzhy426", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "assets/html/zzhy426.yaml", gin.H{
+			"domain": config.Config.Domain,
+		})
+	})
+	
 	router.GET("/shadowrocket", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "assets/html/shadowrocket.html", gin.H{
 			"domain": config.Config.Domain,
@@ -98,6 +119,7 @@ func setupRouter() {
 		proxyNotCountry := c.DefaultQuery("nc", "")
 		proxySpeed := c.DefaultQuery("speed", "")
 		proxyFilter := c.DefaultQuery("filter", "")
+		proxyServer := c.DefaultQuery("server", "")
 		text := ""
 		if proxyTypes == "" && proxyCountry == "" && proxyNotCountry == "" && proxySpeed == "" && proxyFilter == "" {
 			text = appcache.GetString("clashproxies") // A string. To show speed in this if condition, this must be updated after speedtest
@@ -121,6 +143,7 @@ func setupRouter() {
 					NotCountry: proxyNotCountry,
 					Speed:      proxySpeed,
 					Filter:     proxyFilter,
+					Server:     proxyServer,
 				},
 			}
 			text = clash.Provide() // 根据Query筛选节点
@@ -134,6 +157,7 @@ func setupRouter() {
 					NotCountry: proxyNotCountry,
 					Speed:      proxySpeed,
 					Filter:     proxyFilter,
+					Server:     proxyServer,
 				},
 			}
 			text = clash.Provide() // 根据Query筛选节点
